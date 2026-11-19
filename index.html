@@ -106,6 +106,13 @@
             }
         }
 
+        // 질문 카드를 탭/클릭하면 [다음 질문] 버튼과 동일하게 동작 (섞이는 중이거나 세트 종료 화면에서는 무시)
+        function handleCardTap() {
+            if (isSetFinished) return;
+            if (document.getElementById('btn-next').disabled) return;
+            handleNext();
+        }
+
         function handleNext() {
             // 한 세트 정답 안내가 완료된 '다음 세트' 상태일 때 누르면 첫 화면(HOME)으로 이동
             if (isSetFinished) {
@@ -308,6 +315,9 @@
             margin-bottom: 25px;
             min-height: 0;
             font-size: 23px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .button-group {
@@ -391,7 +401,7 @@
             </div>
         </div>
         
-        <div class="question-display">
+        <div class="question-display" onclick="handleCardTap();">
             <div id="question-content">대화를 시작할 준비가 되셨나요?</div>
         </div>
         
